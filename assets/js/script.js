@@ -33,7 +33,6 @@ async function fetchComics() {
         comicsList.innerHTML = `<p class="error">${error.message}</p>`;
     }
 }
-
 function displayInitialComics() {
     const comicsList = document.getElementById('comics-list');
     const comicsToDisplay = comicsData.slice(displayedComics, displayedComics + comicsPerPage);
