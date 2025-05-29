@@ -7,7 +7,7 @@ const comicsPerPage = 10; // Número de cómics a mostrar por página
 
 async function fetchComics() {
     const comicsList = document.getElementById('comics-list');
-    comicsList.innerHTML = '<p>Cargando...</p>';
+    comicsList.innerHTML = ''; // Limpiar el contenido anterior, eliminando el mensaje de carga
     comicsData = []; // Reiniciar el array de cómics
 
     try {
