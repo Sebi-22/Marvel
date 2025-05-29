@@ -14,7 +14,7 @@ async function fetchComics() {
         const ts = Date.now().toString();
         const hash = generateHash();
         let offset = 0;
-        const limit = 100; // Número de cómics por solicitud
+        const limit =100; // Número de cómics por solicitud
         let totalComics = 0;
 
         do {
