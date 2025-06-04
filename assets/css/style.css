@@ -44,6 +44,12 @@ footer {
     max-width: 100%;
 }
 
-.error {
-    color: red;
+.loading-status {
+    display: none;
+    font-size: 18px;
+    text-align: center;
 }
+
+.loading { color: blue; }
+.resolved { color: green; }
+.rejected { color: red; }

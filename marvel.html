@@ -12,28 +12,25 @@
         <h1>Listado de Comics de Marvel</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="characters.html">Personajes</a></li>
+                <li><a href="marvel.html">Inicio</a></li>
+                <li><a href="post.html">Personajes</a></li>
             </ul>
         </nav>
         <select id="sort" onchange="sortComics()">
-    <option value="title">Sort by Title</option>
-    <option value="issueNumber">Sort by Issue Number</option>
-</select>
+            <option value="title">TITULO</option>
+            <option value="issueNumber">Orden Cronologico</option>
+        </select>
     </header>
-    
-<div id="comics-list"></div>
-<button id="load-more" style="display: none;" onclick="loadMoreComics()">Load More</button>
-<div id="comic-detail">
-    <h1 id="comic-title"></h1>
-    <div id="comic-description"></div>
-</div>
-    
+    <div id="loading-status" class="loading-status"></div>
+    <div id="comics-list"></div>
+    <button id="load-more" onclick="loadMoreComics()">Ver más</button>
+    <div id="comic-detail">
+        <h1 id="comic-title"></h1>
+        <div id="comic-description"></div>
+    </div>
     <footer>
         <p>Data provided by Marvel. © 2014 Marvel</p>
     </footer>
-    
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-

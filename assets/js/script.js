@@ -3,13 +3,18 @@ const privateKey = '44c2fe2abf27be2f03d2cfa2a90078f17dac5780';
 const baseUrl = 'https://gateway.marvel.com/v1/public/comics';
 let comicsData = [];
 let displayedComics = 0; // Count of displayed comics
-const comicsPerPage = 10; // Comics to display per page
-
+const comicsPerPage = 10; // Comics to display per page const response = await fetch(`https://cors-anywhere.herokuapp.com/${baseUrl}?apikey=${apiKey}&ts=${ts}&hash=${hash}&offset=${offset}&limit=${limit}`);
+     
 // Fetch cards from Marvel API
 async function fetchComics() {
     const comicsList = document.getElementById('comics-list');
+    const loadingStatus = document.getElementById('loading-status');
     comicsList.innerHTML = ''; // Clear previous content
     comicsData = []; // Reset comics array
+
+    loadingStatus.className = 'loading'; // Estado de carga pendiente
+    loadingStatus.innerText = 'Cargando...';
+    loadingStatus.style.display = 'block';
 
     try {
         const ts = Date.now().toString();
@@ -20,7 +25,14 @@ async function fetchComics() {
 
         do {
             const response = await fetch(`${baseUrl}?apikey=${apiKey}&ts=${ts}&hash=${hash}&offset=${offset}&limit=${limit}`);
-            if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
+            if (!response.ok) {
+                // Si hay un error, intenta cargar datos del JSON de respaldo
+                const placeholderResponse = await fetch('placeholder.json');
+                if (!placeholderResponse.ok) throw new Error(`Error: ${placeholderResponse.status} ${placeholderResponse.statusText}`);
+                const placeholderData = await placeholderResponse.json();
+                comicsData.push(...placeholderData);
+                break; // Salir del bucle
+            }
             const data = await response.json();
             totalComics = data.data.total;
             comicsData.push(...data.data.results);
@@ -29,8 +41,12 @@ async function fetchComics() {
 
         sortComics(); // Sort comics when loaded
         displayInitialComics(); // Show initial comics
+
+        loadingStatus.className = 'resolved'; // Estado de carga resuelto
+        loadingStatus.innerText = 'Carga completada.';
     } catch (error) {
-        document.getElementById('comics-list').innerHTML = `<p class="error">${error.message}</p>`;
+        loadingStatus.className = 'rejected'; // Estado de carga rechazado
+        loadingStatus.innerText = `Error: ${error.message}`;
     }
 }
 
