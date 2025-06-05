@@ -12,12 +12,13 @@ header {
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin-right: 5%;
 }
 
 #comics-list {
@@ -35,9 +36,7 @@ footer {
 }
 
 .comic-item {
-    display: inline-block;
-    width: 200px;
-    margin: 10px;
+    text-align: center;
 }
 
 .comic-item img {
@@ -48,8 +47,19 @@ footer {
     display: none;
     font-size: 18px;
     text-align: center;
+    margin-top: 10px;
 }
 
 .loading { color: blue; }
 .resolved { color: green; }
 .rejected { color: red; }
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
