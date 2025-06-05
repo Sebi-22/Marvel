@@ -23,6 +23,10 @@ async function fetchComics() {
         sortComics();
         loadingStatus.className = 'resolved';
         loadingStatus.innerHTML = 'Carga completada.';
+        
+        // Llamar a la función para cargar imágenes después de que se complete la carga
+        loadImagesForResolvedOrRejected();
+        
     } catch (error) {
         showErrorMessage(error.message);
     }
@@ -115,6 +119,22 @@ function showErrorMessage(errorMessage) {
     }
 }
 
+function loadImagesForResolvedOrRejected() {
+    const comicsList = document.getElementById('comics-list');
+    
+    comicsData.forEach(comic => {
+        if (comic.status === 'resuelto' || comic.status === 'rechazado') {
+            const comicItem = document.createElement('div');
+            comicItem.className = 'comic-item';
+            const imagePath = comic.thumbnail.path;
+            const imageExtension = comic.thumbnail.extension;
+            const fullImageUrl = `${imagePath}/portrait_xlarge.${imageExtension}`;
+            comicItem.innerHTML = `<h2>${comic.title}</h2><img src="${fullImageUrl}" alt="${comic.title}">`;
+            comicsList.appendChild(comicItem);
+        }
+    });
+}
+
 // Eventos para cargar más y ordenar
 document.getElementById('load-more').addEventListener('click', loadMoreComics);
 document.getElementById('sort').addEventListener('change', sortComics);
@@ -123,4 +143,3 @@ document.getElementById('sort').addEventListener('change', sortComics);
 if (document.getElementById('comics-list')) {
     fetchComics();
 }
-

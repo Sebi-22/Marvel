@@ -1,21 +1,23 @@
-    [
-        {
-            "id": 1,
-            "title": "Cómic de Ejemplo 1",
-            "thumbnail": {
-                "path": "https://example.com/image1",
-                "extension": "jpg"
-            },
-            "description": "Descripción del cómic de ejemplo 1."
+[
+    {
+        "id": 1,
+        "title": "Cómic de Ejemplo 1",
+        "thumbnail": {
+            "path": "https://example.com/image1",
+            "extension": "jpg"
         },
-        {
-            "id": 2,
-            "title": "Cómic de Ejemplo 2",
-            "thumbnail": {
-                "path": "https://example.com/image2",
-                "extension": "jpg"
-            },
-            "description": "Descripción del cómic de ejemplo 2."
-        }
-    ]
+        "description": "Descripción del cómic de ejemplo 1.",
+        "status": "resuelto"
+    },
+    {
+        "id": 2,
+        "title": "Cómic de Ejemplo 2",
+        "thumbnail": {
+            "path": "https://example.com/image2",
+            "extension": "jpg"
+        },
+        "description": "Descripción del cómic de ejemplo 2.",
+        "status": "rechazado"
+    }
+]
 
