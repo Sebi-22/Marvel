@@ -1,56 +1,63 @@
 const apiKey = '4f6e28f8fba60432243f4c006a0345f3';
 const privateKey = '44c2fe2abf27be2f03d2cfa2a90078f17dac5780';
 const baseUrl = 'https://gateway.marvel.com/v1/public/comics';
+
 let comicsData = [];
-let displayedComics = 0; // Count of displayed comics
-const comicsPerPage = 10; // Comics to display per page const response = await fetch(`https://cors-anywhere.herokuapp.com/${baseUrl}?apikey=${apiKey}&ts=${ts}&hash=${hash}&offset=${offset}&limit=${limit}`);
-     
-// Fetch cards from Marvel API
+let displayedComics = 0; 
+const comicsPerPage = 10; 
+
 async function fetchComics() {
     const comicsList = document.getElementById('comics-list');
     const loadingStatus = document.getElementById('loading-status');
-    comicsList.innerHTML = ''; // Clear previous content
-    comicsData = []; // Reset comics array
-
-    loadingStatus.className = 'loading'; // Estado de carga pendiente
-    loadingStatus.innerText = 'Cargando...';
+    comicsList.innerHTML = ''; 
+    comicsData = [];
+    displayedComics = 0;
+    loadingStatus.className = 'loading';
+    loadingStatus.innerHTML = 'Cargando...';
     loadingStatus.style.display = 'block';
 
     try {
         const ts = Date.now().toString();
-        const hash = generateHash();
-        let offset = 0;
-        const limit = 100; // Number of comics per request
-        let totalComics = 0;
-
-        do {
-            const response = await fetch(`${baseUrl}?apikey=${apiKey}&ts=${ts}&hash=${hash}&offset=${offset}&limit=${limit}`);
-            if (!response.ok) {
-                // Si hay un error, intenta cargar datos del JSON de respaldo
-                const placeholderResponse = await fetch('placeholder.json');
-                if (!placeholderResponse.ok) throw new Error(`Error: ${placeholderResponse.status} ${placeholderResponse.statusText}`);
-                const placeholderData = await placeholderResponse.json();
-                comicsData.push(...placeholderData);
-                break; // Salir del bucle
-            }
-            const data = await response.json();
-            totalComics = data.data.total;
-            comicsData.push(...data.data.results);
-            offset += limit;
-        } while (offset < totalComics);
-
-        sortComics(); // Sort comics when loaded
-        displayInitialComics(); // Show initial comics
-
-        loadingStatus.className = 'resolved'; // Estado de carga resuelto
-        loadingStatus.innerText = 'Carga completada.';
+        const hash = generateHash(ts);
+        let totalComics = await loadComics(ts, hash);
+        sortComics();
+        loadingStatus.className = 'resolved';
+        loadingStatus.innerHTML = 'Carga completada.';
     } catch (error) {
-        loadingStatus.className = 'rejected'; // Estado de carga rechazado
-        loadingStatus.innerText = `Error: ${error.message}`;
+        showErrorMessage(error.message);
     }
 }
 
-// Display comics on the page
+async function loadComics(ts, hash) {
+    let offset = 0;
+    const limit = 100;
+    let totalComics = 0;
+
+    do {
+        const url = `${baseUrl}?apikey=${apiKey}&ts=${ts}&hash=${hash}&offset=${offset}&limit=${limit}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        totalComics = data.data.total;
+        comicsData.push(...data.data.results);
+        offset += limit;
+    } while (offset < totalComics);
+
+    return totalComics;
+}
+
+async function loadPlaceholderComics() {
+    const response = await fetch('placeholder.json');
+    if (!response.ok) {
+        throw new Error(`Error al cargar placeholder: ${response.status} ${response.statusText}`);
+    }
+    const placeholderData = await response.json();
+    comicsData.push(...placeholderData);
+    return comicsData.length;
+}
+
 function displayInitialComics() {
     const comicsList = document.getElementById('comics-list');
     const comicsToDisplay = comicsData.slice(displayedComics, displayedComics + comicsPerPage);
@@ -61,14 +68,10 @@ function displayInitialComics() {
         const imagePath = comic.thumbnail.path;
         const imageExtension = comic.thumbnail.extension;
         const fullImageUrl = `${imagePath}/portrait_xlarge.${imageExtension}`;
-
-        comicItem.innerHTML = `
-            <h2>${comic.title}</h2>
-            <img src="${fullImageUrl}" alt="${comic.title}">
-        `;
+        comicItem.innerHTML = `<h2>${comic.title}</h2><img src="${fullImageUrl}" alt="${comic.title}">`;
         comicItem.onclick = () => {
             localStorage.setItem('comicId', comic.id);
-            window.location.href = 'post.html';
+            window.location.href = 'detalle.html';
         };
         comicsList.appendChild(comicItem);
     });
@@ -77,18 +80,10 @@ function displayInitialComics() {
     document.getElementById('load-more').style.display = displayedComics < comicsData.length ? 'block' : 'none';
 }
 
-// Load more comics
 function loadMoreComics() {
     displayInitialComics();
 }
 
-// Generate the hash for API access
-function generateHash() {
-    const ts = Date.now().toString();
-    return CryptoJS.MD5(ts + privateKey + apiKey).toString();
-}
-
-// Sort comics based on user selection
 function sortComics() {
     const sortBy = document.getElementById('sort').value;
     if (sortBy === 'title') {
@@ -96,35 +91,36 @@ function sortComics() {
     } else {
         comicsData.sort((a, b) => a.issueNumber - b.issueNumber);
     }
+    displayedComics = 0;
+    document.getElementById('comics-list').innerHTML = '';
     displayInitialComics();
 }
 
-// Fetch comic details when a comic is clicked
-async function fetchComicDetail() {
-    const comicId = localStorage.getItem('comicId');
-    const comicDetail = document.getElementById('comic-detail');
+function generateHash(ts) {
+    return CryptoJS.MD5(ts + privateKey + apiKey).toString();
+}
 
-    try {
-        const ts = Date.now().toString();
-        const hash = generateHash();
-        const response = await fetch(`${baseUrl}/${comicId}?apikey=${apiKey}&ts=${ts}&hash=${hash}`);
+function showErrorMessage(errorMessage) {
+    const loadingStatus = document.getElementById('loading-status');
+    loadingStatus.style.display = 'none';
 
-        if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
-        const data = await response.json();
-        const comic = data.data.results[0];
-        document.getElementById('comic-title').innerText = comic.title;
-        comicDetail.innerHTML = `
-            <img src="${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}" alt="${comic.title}">
-            <p>${comic.description || 'No description available.'}</p>
+    const errorMessageDiv = document.getElementById('error-message');
+    if (errorMessageDiv) { // Verifica que el div exista
+        errorMessageDiv.style.display = 'block'; 
+        errorMessageDiv.innerHTML = `
+            <img src="assets/images/CapitanAmerica.png" alt="Error" />
+            <p>Perdón, pero ha ocurrido un error en la página. Por favor, disculpe las molestias. Estamos trabajando para solucionarlo en breve.</p>
+            <p>Error: ${errorMessage}</p>
         `;
-    } catch (error) {
-        comicDetail.innerHTML = `<p class="error">${error.message}</p>`;
     }
 }
 
-// Initialize fetch comics on load
+// Eventos para cargar más y ordenar
+document.getElementById('load-more').addEventListener('click', loadMoreComics);
+document.getElementById('sort').addEventListener('change', sortComics);
+
+// Ejecutar carga inicial si el contenedor existe
 if (document.getElementById('comics-list')) {
     fetchComics();
-} else if (document.getElementById('comic-detail')) {
-    fetchComicDetail();
 }
+

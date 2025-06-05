@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Comics de Marvel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comics Marvel</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
+
 <body>
     <header>
-        <h1>Listado de Comics de Marvel</h1>
-        <nav>
-            <ul>
-                <li><a href="marvel.html">Inicio</a></li>
-                <li><a href="post.html">Personajes</a></li>
-            </ul>
-        </nav>
-        <select id="sort" onchange="sortComics()">
-            <option value="title">TITULO</option>
-            <option value="issueNumber">Orden Cronológico</option>
+        <h1>Comics Marvel</h1>
+        <select id="sort" style="margin-bottom: 1rem;">
+            <option value="title">Ordenar por título</option>
+            <option value="issueNumber">Ordenar por número de edición</option>
         </select>
     </header>
-    <div id="loading-status" class="loading-status"></div>
+
+    <div id="loading-status"></div>
     <div id="comics-list"></div>
-    <button id="load-more" onclick="loadMoreComics()">Ver más</button>
+    <button id="load-more" style="display:none;">Cargar más cómics</button>
+    
+    <div id="error-message" style="display:none;"></div> <!-- Div para mensajes de error -->
+
     <footer>
         <p>Data provided by Marvel. © 2014 Marvel</p>
     </footer>
+
     <script src="assets/js/script.js"></script>
 </body>
 </html>
