@@ -26,7 +26,6 @@ async function fetchComics() {
         const hash = generateHash(ts);
         await loadComics(ts, hash);
         removeDuplicateComics();
-        sortComics();
         await waitForImagesToLoad();
         loadingText.textContent = 'Carga completada.';
         setTimeout(() => {
@@ -34,6 +33,9 @@ async function fetchComics() {
         }, 500);
     } catch (error) {
         showErrorMessage(error.message);
+    } finally {
+        sortComics(); // Ordenar después de cargar y procesar los cómics
+        loadInitialComics(); // Cargar los primeros cómics después de ordenar
     }
 }
 
@@ -68,6 +70,14 @@ function removeDuplicateComics() {
     comicsData = Array.from(unique.values());
 }
 
+function loadInitialComics() {
+    // Muestra los primeros 10 cómics después de la carga inicial y el ordenamiento
+    displayedComics = 0; // Reinicia el contador de cómics mostrados
+    const comicsList = document.getElementById('comics-list');
+    comicsList.innerHTML = ''; // Limpiar la lista antes de mostrar los cómics
+    loadMoreComics(); // Llama a loadMoreComics para mostrar los primeros cómics
+}
+
 function loadMoreComics() {
     // Esta función se encarga de cargar y mostrar los cómics al hacer clic en "Cargar más".
     console.log('comicsData.length:', comicsData.length);
@@ -87,11 +97,6 @@ function loadMoreComics() {
     for (let i = 0; i < comicsToDisplay.length; i++) {
         const comic = comicsToDisplay[i];
         const imagePath = comic.thumbnail.path;
-
-        if (imagePath.includes('image_not_available')) {
-            // Si la imagen no está disponible, se salta este cómic y se continúa con el siguiente.
-            continue;
-        }
 
         const comicItem = document.createElement('div');
         comicItem.className = 'comic-item';
@@ -169,7 +174,7 @@ function sortComics() {
         return 0;
     });
 
-    displayedComics = 0;
+    // No reiniciamos displayedComics aquí, para que "Cargar más" siga funcionando correctamente
     //loadMoreComics(); // Usamos loadMoreComics para mostrar los cómics ordenados
 }
 
@@ -214,21 +219,15 @@ document.getElementById('load-more').addEventListener('click', () => {
 
 document.getElementById('sort').addEventListener('change', () => {
     sortComics();
+    loadInitialComics(); // Recargar los primeros cómics después de ordenar
 });
 
 document.getElementById('direction')?.addEventListener('change', () => {
     sortComics();
+    loadInitialComics(); // Recargar los primeros cómics después de ordenar
 });
 
 // Carga inicial
 if (document.getElementById('comics-list')) {
-    fetchComics().then(() => {
-        loadMoreComics(); // Llamamos a loadMoreComics después de cargar los cómics
-    });
+    fetchComics();
 }
-
-// **Cambios realizados:**
-// 1. **Eliminación de la función `displayInitialComics`**: Se eliminó esta función ya que su lógica se fusionó con `loadMoreComics`.
-// 2. **Modificación de la función `loadMoreComics`**: Se modificó esta función para que cargue y muestre los cómics al hacer clic en "Cargar más", intentando mostrar hasta 10 cómics, pero mostrando todos los disponibles si no hay suficientes.
-// 3. **Modificación de la función `sortComics`**: Se modificó esta función para que ya no llame a `loadMoreComics` después de ordenar los cómics.
-// 4. **Modificación de la carga inicial**: Se modificó la carga inicial para que llame a `loadMoreComics` después de cargar los cómics.
