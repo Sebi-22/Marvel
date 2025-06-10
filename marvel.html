@@ -11,10 +11,17 @@
 <body>
     <header>
         <h1>Comics Marvel</h1>
-        <select id="sort" aria-label="Ordenar cómics">
+    <select id="sort" aria-label="Ordenar cómics">
             <option value="title">Ordenar por título</option>
             <option value="issueNumber">Ordenar por número de edición</option>
+            <option value="date">Ordenar por fecha de publicación</option>
         </select>
+        <select id="direction" aria-label="Dirección del orden">
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+        </select>
+    </div>
+
     </header>
 
     <div id="loading-status" role="status" aria-live="polite">
