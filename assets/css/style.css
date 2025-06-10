@@ -1,149 +1,180 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #eee;
-    margin: 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-#main-content {
-    flex: 1;
-}
-
-#comics-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-}
-
-.comic-item {
-    background: #1e1e1e;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #000;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: transform 0.3s ease;
-    text-align: center;
-}
-
-.comic-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #e62429;
-}
-
-.comic-item img {
-    width: 100%;
-    border-radius: 6px;
-    margin-top: 0.3rem;
-}
-
-#loading-status {
-    margin: 1rem 0;
-    font-weight: bold;
-}
-
-#loading-status.loading {
-    color: #ffcc00;
-}
-
-#loading-status.resolved {
-    color: #4caf50;
-}
-
-#load-more {
-    background: #e62429;
-    border: none;
-    color: white;
-    font-weight: bold;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    margin: 2rem auto;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-#load-more:hover {
-    background-color: #b71c1c;
-}
-
-#error-message {
-    text-align: center;
-    color: #e53935;
-    margin-top: 2rem;
-    display: none; /* Inicialmente oculto */
-}
-
-#error-message img {
-    width: 150px;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-header {
-    background: linear-gradient(135deg, #e62429, #121212);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(230, 36, 41, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-}
-
-header select {
-    padding: 0.4rem 0.8rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: #292929;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    cursor: pointer;
-    min-width: 180px;
-    transition: background-color 0.3s ease;
-}
-
-header select:hover, header select:focus {
-    background-color: #3c3c3c;
-}
-
-footer {
-    background: linear-gradient(135deg, #e62429, #121212);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 -4px 15px rgba(230, 36, 41, 0.7);
-    text-align: center;
-    color: white;
-    font-weight:00;
-    font-size: 1rem;
-    user-select: none;
-    margin-top: 8.5%;
-}
-
-@media (max-width: 480px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    header h1 {
-        font-size: 2rem;
-    }
-    header select {
-        width: 100%;
-        min-width: auto;
-    }
-}
+     * {
+            box-sizing: border-box;
+        }
+       body {
+            font-family: 'Roboto', sans-serif;
+            background: #000000;
+            color: #222;
+            margin: 0;
+            padding: 1rem 15px 3rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #e62429, #121212);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(230, 36, 41, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        header select {
+            padding: 0.4rem 0.8rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background: #292929;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            cursor: pointer;
+            min-width: 180px;
+            transition: background-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        header select:hover, header select:focus {
+            background-color: #3c3c3c;
+        }
+        #loading-status {
+            margin: 1rem 0;
+            font-weight: 700;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            position: relative;
+            min-height: 120px;
+        }
+        #loading-status.loading {
+            color: #ffcc00;
+        }
+        #loading-status.resolved {
+            color: #4caf50;
+        }
+        #loading-spinner {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            display: block;
+            animation: spin 1.5s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        #comics-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
+            gap: 40px 80px;
+        }
+        .comic-item {
+            font-size: 20px;
+            line-height: 1.2;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #a80000;
+            cursor: pointer;
+            text-align: center;
+            user-select: none;
+        }
+        .comic-item h2 {
+            margin: 4px 0 2px 0;
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #a80000;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        .comic-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+            margin-top: 0;
+            display: block;
+        }
+        #load-more {
+            background-color: #a80000;
+            border: none;
+            color: white;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 6px 30px;
+            cursor: pointer;
+            margin: 20px auto 0 auto;
+            display: block;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            border-radius: 0;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+        #load-more:hover {
+            background-color: #7a0000;
+        }
+        #load-more:focus {
+            outline: 2px solid #444;
+            outline-offset: 2px;
+        }
+        #error-message {
+            text-align: center;
+            color: #e53935;
+            margin-top: 2rem;
+            display: none;
+            font-family: 'Roboto', sans-serif;
+        }
+        #error-message img {
+            width: 150px;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        footer {
+            background: linear-gradient(135deg, #e62429, #121212);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 -4px 15px rgba(230, 36, 41, 0.7);
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            user-select: none;
+            margin-top: auto;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        @media (max-width: 600px) {
+            #comics-list {
+                grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+                gap: 8px 8px;
+            }
+            .comic-item {
+                font-size: 9px;
+            }
+            #load-more {
+                font-size: 11px;
+                padding: 5px 20px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            header select {
+                width: 100%;
+                min-width: auto;
+                margin-top: 0.5rem;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }

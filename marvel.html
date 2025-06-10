@@ -11,17 +11,20 @@
 <body>
     <header>
         <h1>Comics Marvel</h1>
-        <select id="sort" style="margin-bottom: 1rem;">
+        <select id="sort" aria-label="Ordenar cómics">
             <option value="title">Ordenar por título</option>
             <option value="issueNumber">Ordenar por número de edición</option>
         </select>
     </header>
 
-    <div id="loading-status"></div>
-    <div id="comics-list"></div>
-    <button id="load-more">Cargar más cómics</button>
+    <div id="loading-status" role="status" aria-live="polite">
+        <img id="loading-spinner" src="assets/images/image-removebg-preview.png" alt="Telaraña girando de Spiderman" />
+        <div id="loading-text">Cargando...</div>
+    </div>
+    <div id="comics-list" aria-label="Lista de cómics"></div>
+    <button id="load-more" aria-label="Cargar más cómics">LOAD MORE</button>    
     
-    <div id="error-message" style="display:none;"></div> <!-- Div para mensajes de error -->
+    <div id="error-message" role="alert" aria-live="assertive"></div>
 
     <footer>
         <p>Data provided by Marvel. © 2014 Marvel</p>
