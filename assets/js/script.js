@@ -71,7 +71,7 @@
                 comicItem.innerHTML = `<h2>${comic.title}</h2><img src="${fullImageUrl}" alt="Portada del cómic ${comic.title}">`;
                 comicItem.onclick = () => {
                     localStorage.setItem('comicId', comic.id);
-                    window.location.href = 'detalle.html';
+                    window.location.href = 'post.html';
                 };
                 comicsList.appendChild(comicItem);
             });
