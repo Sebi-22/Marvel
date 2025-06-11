@@ -1,184 +1,183 @@
 /* Reset y estructura básica */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho y alto total */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: #000000;
-    color: #222;
-    margin: 0;
-    padding: 1rem 15px 3rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Roboto', sans-serif; /* Fuente principal */
+    background: #000000; /* Color de fondo */
+    color: #222; /* Color del texto */
+    margin: 0; /* Sin margen */
+    padding: 1em 1.5em 3em; /* Espaciado interno */
+    display: flex; /* Usar flexbox para el layout */
+    flex-direction: column; /* Colocar elementos en columna */
+    min-height: 100vh; /* Altura mínima de la ventana */
 }
 
 /* Encabezado */
 header {
-    background: linear-gradient(135deg, #e62429, #121212);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(230, 36, 41, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    background: linear-gradient(135deg, #e62429, #121212); /* Fondo degradado */
+    padding: 1em 2em; /* Espaciado interno */
+    border-radius: 0.625em; /* Bordes redondeados */
+    margin-bottom: 1.5em; /* Margen inferior */
+    box-shadow: 0 0.25em 0.9375em rgba(230, 36, 41, 0.7); /* Sombra */
+    display: flex; /* Usar flexbox para el layout */
+    align-items: center; /* Alinear elementos verticalmente */
+    justify-content: space-between; /* Espacio entre elementos */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
+    margin: 0; /* Sin margen */
+    font-size: 2.5em; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    text-shadow: 0.0625em 0.0625em 0.25em rgba(0, 0, 0, 0.7); /* Sombra del texto */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
+    font-weight: 700; /* Peso de la fuente */
+    text-transform: uppercase; /* Texto en mayúsculas */
 }
 
 header select {
-    padding: 0.4rem 0.8rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: #292929;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
-    cursor: pointer;
-    min-width: 180px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido efecto de transición */
-    font-family: 'Roboto', sans-serif;
+    padding: 0.4em 0.8em; /* Espaciado interno */
+    font-size: 1em; /* Tamaño de fuente */
+    border-radius: 0.3125em; /* Bordes redondeados */
+    border: none; /* Sin borde */
+    outline: none; /* Sin contorno */
+    background: #292929; /* Color de fondo */
+    color: white; /* Color del texto */
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.6); /* Sombra */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    min-width: 11.25em; /* Ancho mínimo */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
 
 header select:hover, header select:focus {
-    background-color: #3c3c3c;
+    background-color: #3c3c3c; /* Color de fondo al pasar el mouse */
     transform: scale(1.02); /* Efecto de hover */
 }
 
 /* Animación de carga */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; } /* Comienza invisible */
+    to { opacity: 1; } /* Termina visible */
 }
 
 .loading {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out; /* Animación de desvanecimiento */
 }
 
 .resolved {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out; /* Animación de desvanecimiento */
     color: #4caf50; /* Color verde para éxito */
 }
 
 .error {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out; /* Animación de desvanecimiento */
     color: #e53935; /* Color rojo para error */
 }
 
 /* Cargando */
 #loading-status {
-    margin: 1rem 0;
-    font-weight: 700;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1rem;
-    text-align: center;
-    position: relative;
-    min-height: 120px;
+    margin: 1em 0; /* Margen superior e inferior */
+    font-weight: 700; /* Peso de la fuente */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
+    font-size: 1em; /* Tamaño de fuente */
+    text-align: center; /* Centrar texto */
+    position: relative; /* Posicionamiento relativo */
+    min-height: 7.5em; /* Altura mínima */
 }
 
 #loading-status.loading {
-    color: #ffcc00;
+    color: #ffcc00; /* Color de texto para estado de carga */
 }
 
 #loading-status.resolved {
-    color: #4caf50;
+    color: #4caf50; /* Color de texto para estado resuelto */
 }
 
 #loading-spinner {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 10px;
-    display: block;
-    animation: spin 1.5s linear infinite;
+    width: 5em; /* Ancho del spinner */
+    height: 5em; /* Alto del spinner */
+    margin: 0 auto 0.625em; /* Margen automático y margen inferior */
+    display: block; /* Mostrar como bloque */
+    animation: spin 1.5s linear infinite; /* Animación de rotación */
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); } /* Comienza en 0 grados */
+    100% { transform: rotate(360deg); } /* Termina en 360 grados */
 }
 
 /* Lista de cómics */
 #comics-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 30px 100px;
+    display: grid; /* Usar grid para el layout */
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr)); /* Columnas responsivas */
+    gap: 1.875em 6.25em; /* Espaciado entre elementos */
     opacity: 1; /* Para el efecto de desvanecimiento */
     transition: opacity 0.5s ease; /* Transición suave */
 }
 
 .comic-item {
-    font-size: 16px;
-    line-height: 1.3;
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #e0e0e0;
-    cursor: pointer;
-    text-align: center;
-    user-select: none;
-    background-color: #1a1a1a;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    font-size: 1em; /* Tamaño de fuente */
+    line-height: 1.3; /* Altura de línea */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
+    color: #e0e0e0; /* Color del texto */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    text-align: center; /* Centrar texto */
+    user-select: none; /* Deshabilitar selección de texto */
+    background-color: #1a1a1a; /* Color de fondo */
+    padding: 0.625em; /* Espaciado interno */
+    border-radius: 0.625em; /* Bordes redondeados */
+    box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.6); /* Sombra */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
 
 .comic-item:hover {
     transform: scale(1.05); /* Aumentar el tamaño al pasar el mouse */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
+    box-shadow: 0 0.5em 1.25em rgba(0, 0, 0, 0.8); /* Sombra más intensa */
 }
 
 .comic-item h2 {
-    margin: 4px 0;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #ff4444;
-    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0.25em 0; /* Margen superior e inferior */
+    font-weight: 700; /* Peso de la fuente */
+    font-size: 0.875em; /* Tamaño de fuente */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    color: #ff4444; /* Color del título */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
 }
 
 .comic-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    margin-top: 0;
-    display: block;
+    width: 100%; /* Ancho completo */
+    height: auto; /* Alto automático */
+    border-radius: 0.375em; /* Bordes redondeados */
+    margin-top: 0; /* Sin margen superior */
+    display: block; /* Mostrar como bloque */
 }
 
 .comic-item .info {
-    font-size: 12px;
-    margin-top: 6px;
-    color: #ccc;
+    font-size: 0.75em; /* Tamaño de fuente */
+    margin-top: 0.375em; /* Margen superior */
+    color: #ccc; /* Color del texto */
 }
 
 /* Botón Load More */
 #load-more {
-    background-color: #a80000;
-    border: none;
-    color: white;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    padding: 6px 30px;
-    cursor: pointer;
-    margin: 20px auto 0 auto;
-    display: block;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
-    border-radius: 0;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido efecto de transición */
-    user-select: none;
-    margin-bottom: 1%;
+    background-color: #a80000; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
+    font-weight: 700; /* Peso de la fuente */
+    font-size: 0.75em; /* Tamaño de fuente */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    padding: 0.375em 1.875em; /* Espaciado interno */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    margin: 1.25em auto 0 auto; /* Margen automático */
+    display: block; /* Mostrar como bloque */
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%); /* Forma del botón */
+    border-radius: 0; /* Sin bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    user-select: none; /* Deshabilitar selección de texto */
+    margin-bottom: 1%; /* Margen inferior */
 }
 
 #load-more:hover {
@@ -187,94 +186,94 @@ header select:hover, header select:focus {
 }
 
 #load-more:focus {
-    outline: 2px solid #444;
-    outline-offset: 2px;
+    outline: 0.125em solid #444; /* Contorno al enfocar */
+    outline-offset: 0.125em; /* Desplazamiento del contorno */
 }
 
 /* Error */
 #error-message {
-    text-align: center;
-    color: #e53935;
-    margin-top: 2rem;
-    display: none;
-    font-family: 'Roboto', sans-serif;
+    text-align: center; /* Centrar texto */
+    color: #e53935; /* Color del texto */
+    margin-top: 2em; /* Margen superior */
+    display: none; /* Ocultar por defecto */
+    font-family: 'Roboto', sans-serif; /* Fuente principal */
 }
 
 #error-message img {
-    width: 150px;
-    margin-bottom: 1rem;
-    border-radius: 8px;
+    width: 9.375em; /* Ancho de la imagen */
+    margin-bottom: 1em; /* Margen inferior */
+    border-radius: 0.5em; /* Bordes redondeados */
 }
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #e62429, #121212);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 -4px 15px rgba(230, 36, 41, 0.7);
-    text-align: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    user-select: none;
-    margin-top: auto;
-    font-family: 'Roboto Condensed', sans-serif;
+    background: linear-gradient(135deg, #e62429, #121212); /* Fondo degradado */
+    padding: 1em 2em; /* Espaciado interno */
+    border-radius: 0.625em; /* Bordes redondeados */
+    box-shadow: 0 -0.25em 0.9375em rgba(230, 36, 41, 0.7); /* Sombra */
+    text-align: center; /* Centrar texto */
+    color: white; /* Color del texto */
+    font-weight: 700; /* Peso de la fuente */
+    font-size: 1em; /* Tamaño de fuente */
+    user-select: none; /* Deshabilitar selección de texto */
+    margin-top: auto; /* Margen superior automático */
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente secundaria */
 }
 
 /* Detalle del cómic */
 main#comic-detail {
-    max-width: 1100px;
-    margin: 40px auto;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 68.75em; /* Ancho máximo */
+    margin: 2.5em auto; /* Margen superior e inferior automático */
+    background-color: #fff; /* Color de fondo */
+    padding: 1.875em; /* Espaciado interno */
+    border-radius: 0.75em; /* Bordes redondeados */
+    box-shadow: 0 0.5em 1.25em rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
 .comic-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    align-items: flex-start;
+    display: flex; /* Usar flexbox para el layout */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    gap: 1.875em; /* Espaciado entre elementos */
+    align-items: flex-start; /* Alinear elementos al inicio */
 }
 
 .comic-image {
-    max-width: 350px;
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    max-width: 21.875em; /* Ancho máximo */
+    width: 100%; /* Ancho completo */
+    border-radius: 0.75em; /* Bordes redondeados */
+    box-shadow: 0 0.375em 0.75em rgba(0, 0, 0, 0.2); /* Sombra */
 }
 
 .comic-meta {
-    flex: 1;
-    min-width: 260px;
+    flex: 1; /* Ocupa el espacio restante */
+    min-width: 16.25em; /* Ancho mínimo */
 }
 
 .comic-meta p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 16px;
+    font-size: 1.1em; /* Tamaño de fuente */
+    line-height: 1.6; /* Altura de línea */
+    margin-bottom: 1em; /* Margen inferior */
 }
 
 .comic-meta strong {
-    color: #d32f2f;
-    font-weight: 600;
+    color: #d32f2f; /* Color del texto */
+    font-weight: 600; /* Peso de la fuente */
 }
 
 .back-button-container {
-    text-align: center;
-    margin: 30px 0;
+    text-align: center; /* Centrar texto */
+    margin: 1.875em 0; /* Margen superior e inferior */
 }
 
 .back-button {
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #d32f2f; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 0.75em 1.5625em; /* Espaciado interno */
+    font-size: 1em; /* Tamaño de fuente */
+    border-radius: 0.5em; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.2); /* Sombra */
     transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
 }
 
@@ -284,35 +283,35 @@ main#comic-detail {
 
 .review-section {
     background-color: #f9f9f9; /* Fondo claro para la sección de reseñas */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 20px; /* Espaciado interno */
-    margin: 20px 0; /* Margen superior e inferior */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 0.625em; /* Bordes redondeados */
+    padding: 1.25em; /* Espaciado interno */
+    margin: 1.25em 0; /* Margen superior e inferior */
+    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 .review-section h2 {
-    font-size: 1.5rem; /* Tamaño de fuente para el título */
-    margin-bottom: 10px; /* Espacio debajo del título */
+    font-size: 1.5em; /* Tamaño de fuente para el título */
+    margin-bottom: 0.625em; /* Espacio debajo del título */
     color: #d32f2f; /* Color del título */
 }
 
 .review-section textarea {
     width: 100%; /* Ancho completo */
-    height: 100px; /* Altura del área de texto */
+    height: 6.25em; /* Altura del área de texto */
     border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    font-size: 1rem; /* Tamaño de fuente */
+    border-radius: 0.3125em; /* Bordes redondeados */
+    padding: 0.625em; /* Espaciado interno */
+    font-size: 1em; /* Tamaño de fuente */
     resize: none; /* Deshabilitar el redimensionamiento */
-    margin-bottom: 10px; /* Espacio debajo del área de texto */
+    margin-bottom: 0.625em; /* Espacio debajo del área de texto */
 }
 
 .review-section select {
-    padding: 0.4rem 0.8rem; /* Espaciado interno */
-    font-size: 1rem; /* Tamaño de fuente */
-    border-radius: 5px; /* Bordes redondeados */
+    padding: 0.4em 0.8em; /* Espaciado interno */
+    font-size: 1em; /* Tamaño de fuente */
+    border-radius: 0.3125em; /* Bordes redondeados */
     border: 1px solid #ccc; /* Borde gris claro */
-    margin-bottom: 10px; /* Espacio debajo del select */
+    margin-bottom: 0.625em; /* Espacio debajo del select */
     background: #fff; /* Fondo blanco */
     color: #222; /* Color del texto */
 }
@@ -321,9 +320,9 @@ main#comic-detail {
     background-color: #d32f2f; /* Color de fondo del botón */
     color: white; /* Color del texto del botón */
     border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 1rem; /* Tamaño de fuente */
-    border-radius: 5px; /* Bordes redondeados */
+    padding: 0.625em 1.25em; /* Espaciado interno */
+    font-size: 1em; /* Tamaño de fuente */
+    border-radius: 0.3125em; /* Bordes redondeados */
     cursor: pointer; /* Cambiar cursor al pasar por encima */
     transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
 }
@@ -333,59 +332,60 @@ main#comic-detail {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 48em) { /* 768px */
     .comic-info {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        flex-direction: column; /* Cambiar a columna */
+        align-items: center; /* Centrar elementos */
+        text-align: center; /* Centrar texto */
     }
 
     .comic-meta {
-        width: 100%;
+        width: 100%; /* Ancho completo */
     }
 
     main#comic-detail {
-        padding: 20px;
-        margin: 20px;
+        padding: 1.25em; /* Espaciado interno */
+        margin: 1.25em; /* Margen */
     }
 
     .comic-meta p {
-        font-size: 1rem;
+        font-size: 1em; /* Tamaño de fuente */
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 37.5em) { /* 600px */
     #comics-list {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 8px 8px;
+        grid-template-columns: repeat(auto-fill, minmax(6.25em, 1fr)); /* Columnas responsivas */
+        gap: 0.5em 0.5em; /* Espaciado entre elementos */
     }
 
     .comic-item {
-        font-size: 12px;
+        font-size: 0.75em; /* Tamaño de fuente */
     }
 
     .comic-item h2 {
-        font-size: 11px;
+        font-size: 0.6875em; /* Tamaño de fuente */
     }
 
     #load-more {
-        font-size: 11px;
-        padding: 5px 20px;
+        font-size: 0.6875em; /* Tamaño de fuente */
+        padding: 0.3125em 1.25em; /* Espaciado interno */
     }
 
     header h1 {
-        font-size: 2rem;
+        font-size: 2em; /* Tamaño de fuente */
     }
 
     header select {
-        width: 100%;
-        min-width: auto;
-        margin-top: 0.5rem;
+        width: 100%; /* Ancho completo */
+        min-width: auto; /* Sin ancho mínimo */
+        margin-top: 0.5em; /* Margen superior */
     }
 
     header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+        flex-direction: column; /* Cambiar a columna */
+        align-items: flex-start; /* Alinear a la izquierda */
+        gap: 1em; /* Espacio entre elementos */
     }
 }
+

@@ -4,7 +4,7 @@ const privateKey = '44c2fe2abf27be2f03d2cfa2a90078f17dac5780'; // Clave privada 
 const baseUrl = 'https://gateway.marvel.com/v1/public/comics'; // URL base de la API
 
 let comicsData = []; // Array para almacenar los datos de los cómics
-let displayedComics = 0; // Contador de cómics mostrados
+let displayedComics = []; // Contador de cómics mostrados
 const comicsPerPage = 10; // Mostrar 10 cómics por página
 
 // Función asíncrona para obtener los cómics de la API
@@ -27,6 +27,7 @@ async function fetchComics() {
         const ts = Date.now().toString(); // Timestamp actual
         const hash = generateHash(ts); // Generar hash para la autenticación
         await loadComics(ts, hash); // Cargar los cómics
+        removeDuplicateComics(); // Eliminar cómics duplicados
         await waitForImagesToLoad(); // Esperar a que se carguen las imágenes
         
         // Estado de éxito
@@ -135,8 +136,11 @@ function loadMoreComics() {
 
         // Agregar evento de clic para redirigir a la página de detalles
         comicItem.onclick = () => {
+            showLoadingSpinner(); // Mostrar el spinner de carga
             localStorage.setItem('comicId', comic.id); // Guardar el ID del cómic en localStorage
-            window.location.href = 'post.html'; // Redirigir a la página de detalles del cómic
+            setTimeout(() => {
+                window.location.href = 'post.html'; // Redirigir a la página de detalles del cómic
+            }, 500); // Esperar medio segundo antes de redirigir
         };
 
         // Solo se agrega el cómic si la imagen se carga correctamente
@@ -151,6 +155,18 @@ function loadMoreComics() {
 
     displayedComics += displayedCount; // Actualizar el contador de cómics mostrados
     document.getElementById('load-more').style.display = displayedComics < comicsData.length ? 'block' : 'none'; // Mostrar u ocultar el botón de cargar más
+}
+
+// Función para mostrar el spinner de carga
+function showLoadingSpinner() {
+    const loadingStatus = document.getElementById('loading-status');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const loadingText = document.getElementById('loading-text');
+
+    loadingStatus.className = 'loading'; // Cambiar el estado de carga
+    loadingText.textContent = 'Cargando detalles...'; // Mensaje de carga
+    loadingStatus.style.display = 'block'; // Mostrar el estado de carga
+    loadingSpinner.style.display = 'block'; // Mostrar el spinner de carga
 }
 
 // Función para ordenar los cómics
