@@ -111,8 +111,8 @@ header select:hover, header select:focus {
 /* Lista de cómics */
 #comics-list {
     display: grid; /* Usar grid para el layout */
-    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr)); /* Columnas responsivas */
-    gap: 1.875em 6.25em; /* Espaciado entre elementos */
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas en pantallas grandes */
+    gap: 1.875em; /* Espaciado entre elementos */
     opacity: 1; /* Para el efecto de desvanecimiento */
     transition: opacity 0.5s ease; /* Transición suave */
 }
@@ -371,12 +371,17 @@ main#comic-detail {
     .comic-meta p {
         font-size: 1em; /* Tamaño de fuente */
     }
+
+    #comics-list {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas medianas */
+        gap: 1em; /* Ajuste del espacio */
+    }
 }
 
 @media (max-width: 37.5em) { /* 600px */
     #comics-list {
-        grid-template-columns: repeat(auto-fill, minmax(6.25em, 1fr)); /* Columnas responsivas */
-        gap: 0.5em 0.5em; /* Espaciado entre elementos */
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+        gap: 0.5em; /* Ajuste del espacio */
     }
 
     .comic-item {
@@ -406,6 +411,13 @@ main#comic-detail {
         flex-direction: column; /* Cambiar a columna */
         align-items: flex-start; /* Alinear a la izquierda */
         gap: 1em; /* Espacio entre elementos */
+    }
+}
+
+@media (max-width: 30em) { /* 480px */
+    #comics-list {
+        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+        gap: 0.5em; /* Ajuste del espacio */
     }
 }
 
