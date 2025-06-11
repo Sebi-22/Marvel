@@ -31,7 +31,7 @@ header h1 {
     margin: 0;
     font-size: 2.5rem;
     color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
@@ -45,15 +45,36 @@ header select {
     outline: none;
     background: #292929;
     color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
     cursor: pointer;
     min-width: 180px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido efecto de transición */
     font-family: 'Roboto', sans-serif;
 }
 
 header select:hover, header select:focus {
     background-color: #3c3c3c;
+    transform: scale(1.02); /* Efecto de hover */
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.loading {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.resolved {
+    animation: fadeIn 0.5s ease-in-out;
+    color: #4caf50; /* Color verde para éxito */
+}
+
+.error {
+    animation: fadeIn 0.5s ease-in-out;
+    color: #e53935; /* Color rojo para error */
 }
 
 /* Cargando */
@@ -108,13 +129,13 @@ header select:hover, header select:focus {
     background-color: #1a1a1a;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
 }
 
 .comic-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    transform: scale(1.05); /* Aumentar el tamaño al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
 }
 
 .comic-item h2 {
@@ -155,13 +176,14 @@ header select:hover, header select:focus {
     display: block;
     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
     border-radius: 0;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Añadido efecto de transición */
     user-select: none;
     margin-bottom: 1%;
 }
 
 #load-more:hover {
-    background-color: #7a0000;
+    background-color: #7a0000; /* Cambiar color al pasar el mouse */
+    transform: scale(1.05); /* Aumentar el tamaño del botón */
 }
 
 #load-more:focus {
@@ -253,12 +275,13 @@ main#comic-detail {
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
 }
 
 .back-button:hover {
-    background-color: #b71c1c;
+    background-color: #b71c1c; /* Color de fondo al pasar el mouse */
 }
+
 .review-section {
     background-color: #f9f9f9; /* Fondo claro para la sección de reseñas */
     border-radius: 10px; /* Bordes redondeados */
