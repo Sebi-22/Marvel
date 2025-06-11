@@ -330,6 +330,27 @@ main#comic-detail {
 .review-section button:hover {
     background-color: #b71c1c; /* Color de fondo al pasar el mouse */
 }
+.social-media {
+    display: flex; /* Usar flexbox para alinear los íconos */
+    justify-content: center; /* Centrar los íconos */
+    margin-top: 1em; /* Margen superior */
+    font-size: 0.8em;
+    
+}
+
+.social-media a {
+    margin:0.5em; /* Espaciado entre íconos */
+}
+
+.social-media img {
+    width: 2.5em; /* Ancho de los íconos */
+    height: 1.5em; /* Alto de los íconos */
+    transition: transform 0.3s; /* Transición suave para el hover */
+}
+
+.social-media img:hover {
+    transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+}
 
 /* Responsive */
 @media (max-width: 48em) { /* 768px */
