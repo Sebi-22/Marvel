@@ -71,7 +71,6 @@ function removeDuplicateComics() {
 }
 
 function loadInitialComics() {
-    // Muestra los primeros 10 cómics después de la carga inicial y el ordenamiento
     displayedComics = 0; // Reinicia el contador de cómics mostrados
     const comicsList = document.getElementById('comics-list');
     comicsList.innerHTML = ''; // Limpiar la lista antes de mostrar los cómics
@@ -79,16 +78,11 @@ function loadInitialComics() {
 }
 
 function loadMoreComics() {
-    // Esta función se encarga de cargar y mostrar los cómics al hacer clic en "Cargar más".
-    console.log('comicsData.length:', comicsData.length);
-    console.log('displayedComics:', displayedComics);
-
     const comicsList = document.getElementById('comics-list');
     let comicsToDisplay = comicsData.slice(displayedComics, displayedComics + comicsPerPage);
     let displayedCount = 0;
 
     if (comicsToDisplay.length === 0) {
-        // Si no hay más cómics para mostrar, se muestra un mensaje y se oculta el botón "Cargar más".
         comicsList.innerHTML = '<p>No hay más cómics disponibles.</p>';
         document.getElementById('load-more').style.display = 'none';
         return;
@@ -131,7 +125,6 @@ function loadMoreComics() {
         displayedCount++;
 
         if (displayedCount >= comicsPerPage) {
-            // Si ya se han mostrado 10 cómics, se detiene el bucle.
             break;
         }
     }
@@ -175,7 +168,6 @@ function sortComics() {
     });
 
     // No reiniciamos displayedComics aquí, para que "Cargar más" siga funcionando correctamente
-    //loadMoreComics(); // Usamos loadMoreComics para mostrar los cómics ordenados
 }
 
 function generateHash(ts) {
@@ -226,6 +218,21 @@ document.getElementById('direction')?.addEventListener('change', () => {
     sortComics();
     loadInitialComics(); // Recargar los primeros cómics después de ordenar
 });
+
+// Evento de búsqueda
+document.getElementById('search').addEventListener('input', (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    const filteredComics = comicsData.filter(comic => comic.title.toLowerCase().includes(searchTerm));
+    displayedComics = 0; // Reiniciar el contador de cómics mostrados
+    loadFilteredComics(filteredComics);
+});
+
+function loadFilteredComics(filteredComics) {
+    const comicsList = document.getElementById('comics-list');
+    comicsList.innerHTML = ''; // Limpiar la lista antes de mostrar los cómics
+    comicsData = filteredComics; // Actualizar los datos de cómics a los filtrados
+    loadMoreComics(); // Cargar los cómics filtrados
+}
 
 // Carga inicial
 if (document.getElementById('comics-list')) {

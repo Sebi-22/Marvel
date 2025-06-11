@@ -51,3 +51,17 @@ function showComicDetails(comic) {
     `;
     document.getElementById('comic-detail').innerHTML = html;
 }
+
+// Manejo de reseñas
+document.getElementById('submit-review').addEventListener('click', () => {
+    const reviewText = document.getElementById('review-text').value;
+    const rating = document.getElementById('rating').value;
+
+    if (reviewText) {
+        // Aquí puedes guardar la reseña en un almacenamiento local o enviar a un servidor
+        alert(`Reseña enviada: ${reviewText} - Calificación: ${rating} estrellas`);
+        document.getElementById('review-text').value = ''; // Limpiar el campo de reseña
+    } else {
+        alert('Por favor, escribe una reseña antes de enviar.');
+    }
+});
