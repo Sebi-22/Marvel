@@ -4,7 +4,7 @@ const privateKey = '44c2fe2abf27be2f03d2cfa2a90078f17dac5780'; // Clave privada 
 const baseUrl = 'https://gateway.marvel.com/v1/public/comics'; // URL base de la API
 
 let comicsData = []; // Array para almacenar los datos de los cómics
-let displayedComics = []; // Contador de cómics mostrados
+let displayedComics = 0; // Contador de cómics mostrados
 const comicsPerPage = 10; // Mostrar 10 cómics por página
 
 // Función asíncrona para obtener los cómics de la API
@@ -70,7 +70,7 @@ async function loadComics(ts, hash) {
     return totalComics; // Retornar el total de cómics
 }
 
-// Función para eliminar cómics duplicados
+// Función para eliminar cómics duplicados y sin imagen
 function removeDuplicateComics() {
     const unique = new Map(); // Usar un Map para almacenar cómics únicos
     comicsData.forEach(comic => {
@@ -274,7 +274,7 @@ document.getElementById('search').addEventListener('input', (event) => {
     }
 });
 
-// Función para cargar cómics filtrados
+// Función para cargar cóm ics filtrados
 function loadFilteredComics(filteredComics) {
     const comicsList = document.getElementById('comics-list');
     comicsList.innerHTML = ''; // Limpiar la lista antes de mostrar los cómics
